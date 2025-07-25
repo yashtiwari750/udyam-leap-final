@@ -1,16 +1,14 @@
 // src/components/Dashboard.jsx
-
 import React from 'react';
-// We need our 'auth' connection and the 'signOut' function from Firebase
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 
-export default function Dashboard() {
+// Import our new component
+import GoalPlanner from './GoalPlanner';
 
-  // This function will run when the sign out button is clicked
+export default function Dashboard() {
   const handleSignOut = async () => {
     try {
-      // We call the signOut function, passing it our auth connection
       await signOut(auth);
       alert("You have been signed out.");
     } catch (error) {
@@ -20,15 +18,21 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-8 bg-white rounded-lg shadow-md text-center">
-      <h1 className="text-2xl font-bold text-gray-800">Welcome to the Dashboard!</h1>
-      <p className="mt-2 text-gray-600">You are successfully logged in.</p>
-      <button
-        className="mt-6 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        onClick={handleSignOut}
-      >
-        Sign Out
-      </button>
+    // We've changed the layout to be a full-width container
+    <div className="w-full min-h-screen bg-gray-100 flex flex-col items-center p-4">
+      <div className="w-full max-w-4xl flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold text-gray-800">Udyam Leap Dashboard</h1>
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleSignOut}
+        >
+          Sign Out
+        </button>
+      </div>
+
+      {/* We are now displaying the GoalPlanner component here */}
+      <GoalPlanner />
+
     </div>
   );
 }
