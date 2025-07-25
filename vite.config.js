@@ -1,10 +1,9 @@
-import { defineConfig } from 'vite';
-
-// https://vitejs.dev/config/
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 export default defineConfig({
-  plugins: [],
+  plugins: [react()],
   server: {
     host: '0.0.0.0',
-    hmr: true, // Change this line to false disable auto-refreshing.
+    hmr: { host: process.env.REPLIT_DEV_DOMAIN },
   }
 })
